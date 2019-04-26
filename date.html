@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p @click="currentDayFunc">1)текущий день - {{currentDay}}</p>
+        <p @click="currentMountFunc">2)текущий месяц- {{currentMount}}</p>
+        <p @click="currentYearFunc">3)текущий год - {{currentYear}}</p>
+        <p @click="countDayInCorrentMountFunc">4)дней в этом месяце - {{countDayInCorrentMount}}</p>
+        <p @click="currentDayFunc">5)день недели - {{dayCarrentWeek}}</p>
+        <p @click="currentDayFunc">6)заданая дата - {{setNewDate}}</p>
+        <p @click="currentDayFunc">7)кол. дней в след. месяце - {{countDeyNextMount}}</p>
+        <p @click="currentDayFunc">8)кол. дней в прошлом месяце - {{countDeyPrevMount}}</p>
+        <p @click="currentDayFunc">9)название месяца - {{nameMount}}</p>
+        <p @click="currentDayFunc">10)название дня недели - {{nameDay}}</p>
+        <p @click="currentDayFunc">11)кол недель в месяце  - {{countWeekInMount}}</p>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+    Vue.config.devtools = true;
+
+    var app = new Vue({
+        data: function() {
+            return {
+               date: new Date(),
+               currentDay: 0,
+               currentMount: 00,
+               currentYear: 00,
+               countDayInCorrentMount: 00,
+               dayCarrentWeek: 00,
+               setNewDate: 00,
+               countDeyNextMount: 00,
+               countDeyPrevMount: 00,
+               nameMount: 00,
+               nameDay: 00,
+               countWeekInMount: 00
+            }
+        },
+        methods: {
+            currentDayFunc(){
+                var d = this.date;
+                return this.currentDay = String(d.getDate()).padStart(2, '0');
+            },
+            currentMountFunc(){
+                var d = this.date;
+                return this.currentMount = String(d.getMonth() + 1).padStart(2, '0');
+            },
+            currentYearFunc(){
+                var d = this.date;
+                return this.currentYear = String(d.getFullYear()).padStart(2, '0');
+            },
+            countDayInCorrentMountFunc(){
+                var d = this.date;
+                var monthStart = new Date(d.getFullYear(), d.getMonth(), 1);
+                var monthEnd = new Date(d.getFullYear(), d.getMonth()+ 1, 1);
+                var monthLength = (monthEnd - monthStart) / (1000 * 60 * 60 * 24)
+                return this.countDayInCorrentMount = monthLength;
+            }
+        }
+        
+    });
+
+    app.$mount('#app');
+    //сделать календарь который может строится с понедельника и с вс 
+
+    </script>
+</body>
+</html>
